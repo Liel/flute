@@ -1,0 +1,52 @@
+audio {
+  margin-top: 0;
+}
+
+.wrapper {
+  width: 90%;
+  margin: auto;
+  display: flex;
+  align-items: baseline;
+}
+
+.audio-channel {
+    flex-basis: 90%;
+    display: flex;
+    justify-content: space-between;
+    border: 1px dashed;
+    border-radius: 3px;
+    padding: 3%;
+
+    &.playing  {
+      animation: playing-box 1s infinite;
+      //transition-duration: 0.7s;
+    }
+
+    .playing {
+      flex-basis: 70%;
+
+      .icon-p {
+        animation: playing 1s infinite;
+        transition-duration: 0.7s;
+      }
+    }
+}
+
+.remove {
+  flex-basis: 10%;
+  border-radius: 0 7px 7px 0;
+  background-color: #ff6464;
+  padding: 3% 0;
+}
+
+@keyframes playing {
+  0% { margin-left: -60%; opacity: 0.4; }
+  50% { margin-left: 0; opacity: 0.7; }
+  100% { margin-left: 80%; opacity: 1; }
+}
+
+@keyframes playing-box {
+  0% { border-style: dashed; }
+  50% { border-style: dotted; }
+  100% { border-style: solid; }
+}

@@ -1,0 +1,17 @@
+<div id="create">
+  <div id="record" (click)="recordBtnClicked()" [class.recording]="isRecording">
+    <i class="fa fa-microphone" aria-hidden="true"></i>
+  </div>
+  <div *ngIf="channels.length > 0" id="playAll">
+    <span (click)="playAll()">Play All {{longestDuration | audioDuration}}</span>
+  </div>
+  <div id="channels">
+    <app-audio-channel
+      *ngFor="let c of channels"
+      (remove)="removeChannel($event)"
+      [channel]="c">
+    </app-audio-channel>
+  </div>
+  <app-save-mix [sources]="channels"></app-save-mix>
+
+</div>
