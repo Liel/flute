@@ -8,7 +8,7 @@ import { AudioChannelsService } from 'src/app/services/audio-channels.service';
   styleUrls: ['./create.component.scss']
 })
 export class CreateComponent implements OnInit {
-  audioContext : AudioContext;
+  audioContext : AudioContext = undefined;
   gumStream: any;
   rec : any;
   input: any;
@@ -22,8 +22,7 @@ export class CreateComponent implements OnInit {
   constructor(private audioChannelsService : AudioChannelsService) { }
 
   ngOnInit(): void {
-    this.audioContext = new AudioContext();
-
+    // this.audioContext = new AudioContext();
   }
 
   public recordBtnClicked() {
@@ -68,7 +67,7 @@ export class CreateComponent implements OnInit {
     this.gumStream = stream;
 
     /* use the stream */
-    //this.audioContext = new AudioContext();
+    this.audioContext = this.audioContext || new AudioContext();
     this.input = this.audioContext.createMediaStreamSource(stream);
 
     /*
