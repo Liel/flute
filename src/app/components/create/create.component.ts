@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AudioChannel } from 'src/app/models/audio-channel.model';
 import { AudioChannelsService } from 'src/app/services/audio-channels.service';
-import {Recorder} from 'recorder-js';
 
 @Component({
   selector: 'app-create',
@@ -55,6 +54,7 @@ export class CreateComponent implements OnInit {
       var constraints = { audio: true, video:false }
 
     navigator.mediaDevices.getUserMedia(constraints).then(this.createStream.bind(this)).catch(function(err) {
+      console.log(err);
         //enable the record button if getUserMedia() fails
         // recordButton.disabled = false;
         // stopButton.disabled = true;
@@ -75,7 +75,7 @@ export class CreateComponent implements OnInit {
       Create the Recorder object and configure to record mono sound (1 channel)
       Recording 2 channels  will double the file size
     */
-
+    var Recorder = window["Recorder"];
     this.rec = new Recorder(this.input,{numChannels:this.isMono?1:2})
 
     //start the recording process
@@ -106,6 +106,20 @@ export class CreateComponent implements OnInit {
     //name of .wav file to use during upload and download (without extendion)
     var filename = new Date().toISOString();
 
+    // var au = document.createElement('audio');
+    // var li = document.createElement('li');
+    // var link = document.createElement('a');
+    // //add controls to the <audio> element
+    // au.controls = true;
+    // au.src = url;
+    // //link the a element to the blob
+    // link.href = url;
+    // link.download = new Date().toISOString() + '.wav';
+    // link.innerHTML = link.download;
+    // //add the new audio and a elements to the li element
+    // li.appendChild(au);
+    // li.appendChild(link);
+    // document.body.appendChild(au);
 
     //add the li element to the ol
     //recordingsList.appendChild(li);
