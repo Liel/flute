@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AudioChannel } from 'src/app/models/audio-channel.model';
 import { AudioChannelsService } from 'src/app/services/audio-channels.service';
+import {Recorder} from 'recorder-js';
 
 @Component({
   selector: 'app-create',
@@ -74,6 +75,7 @@ export class CreateComponent implements OnInit {
       Create the Recorder object and configure to record mono sound (1 channel)
       Recording 2 channels  will double the file size
     */
+
     this.rec = new Recorder(this.input,{numChannels:this.isMono?1:2})
 
     //start the recording process
