@@ -1,9 +1,17 @@
+$bgColor: rebeccapurple;
+$textColor: white;
+
 #record {
-    font-size: 47pt;
-    border: 2px solid;
-    border-radius: 50px;
-    width: 26%;
-    margin: auto;
+  font-size: 47pt;
+  border: 2px solid;
+  border-radius: 50px;
+  width: 26%;
+  margin: auto;
+  position: absolute;
+  left: 36%;
+  bottom: 28px;
+  background: repeating-radial-gradient($bgColor, transparent 100px);
+  color: $textColor;
 
     &.recording {
       animation: recording 1s infinite;
@@ -11,8 +19,32 @@
     }
 }
 
+#playAll {
+  color: $textColor;
+  background: linear-gradient($bgColor, transparent);
+  padding: 8% 0;
+
+  .play-all-icon {
+    font-size: 36pt;
+  }
+
+  .hidden {visibility: hidden;}
+}
+
 @keyframes recording {
-  0% { color: red; }
-  50% { color: white; }
-  100% { color: red; }
+  0% {
+    color: red;
+   }
+  50% {
+    color: $textColor;
+    transform: rotate(
+      180deg
+      );
+  }
+  100% {
+    color: red;
+    transform: rotate(
+      360deg
+      );
+  }
 }

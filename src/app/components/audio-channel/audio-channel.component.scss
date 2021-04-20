@@ -19,7 +19,6 @@ audio {
 
     &.playing  {
       animation: playing-box 1s infinite;
-      //transition-duration: 0.7s;
     }
 
     .playing {
@@ -36,6 +35,7 @@ audio {
   flex-basis: 10%;
   border-radius: 0 7px 7px 0;
   background-color: #ff6464;
+  color:white;
   padding: 3% 0;
 }
 

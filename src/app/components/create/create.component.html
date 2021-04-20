@@ -2,8 +2,9 @@
   <div id="record" (click)="recordBtnClicked()" [class.recording]="isRecording">
     <i class="fa fa-microphone" aria-hidden="true"></i>
   </div>
-  <div *ngIf="channels.length > 0" id="playAll">
-    <span (click)="playAll()">Play All {{longestDuration | audioDuration}}</span>
+  <div id="playAll">
+    <span class="flute"></span>
+    <span [class.hidden]="channels.length == 0" (click)="playAll()"><div class="play-all-icon"><i class="fa fa-play"></i></div> {{longestDuration | audioDuration}}</span>
   </div>
   <div id="channels">
     <app-audio-channel
@@ -12,5 +13,7 @@
       [channel]="c">
     </app-audio-channel>
   </div>
-  <app-save-mix [sources]="channels"></app-save-mix>
+  <div *ngIf="channels?.length">
+    <app-save-mix [sources]="channels"></app-save-mix>
+  </div>
 </div>

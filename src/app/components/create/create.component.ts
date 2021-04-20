@@ -22,7 +22,6 @@ export class CreateComponent implements OnInit {
   constructor(private audioChannelsService : AudioChannelsService) { }
 
   ngOnInit(): void {
-    // this.audioContext = new AudioContext();
   }
 
   public recordBtnClicked() {
@@ -78,7 +77,7 @@ export class CreateComponent implements OnInit {
     this.rec = new Recorder(this.input,{numChannels:this.isMono?1:2})
 
     //start the recording process
-    this.rec.record()
+    this.rec.record();
 
     console.log("Recording started");
 

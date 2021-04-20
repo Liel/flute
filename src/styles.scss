@@ -1,7 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
+
+$appTextColor: #080f13;
 body {
-  background-color: #9aeab7;
-  color: white;
+  background-color: #ffffff;
+  color: $appTextColor;
   text-align: center;
+  font-family: cursive;
+  margin:0;
+}
+
+button {
+  background: transparent;
+  color: $appTextColor;
+  border: 0;
+  padding: 2% 1%;
+  font-weight: 600;
+  margin: 3%;
+  width: 44%;
+  border: 1px dashed;
+  font-size: 13pt;
   font-family: cursive;
 }

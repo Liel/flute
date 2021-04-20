@@ -34,7 +34,7 @@ export class SaveMixComponent {
         })
     }
 
-    public  stopMix(duration, ...media) {
+    public stopMix(duration, ...media) {
       setTimeout(function(media) {
         media.forEach(function(node) {
           node.stop()
@@ -51,6 +51,7 @@ export class SaveMixComponent {
     }
 
     private prepareToSave(data) {
+      console.log(data);
         this.len = Math.max.apply(Math, data.map(function(buffer : any) {
           return buffer.byteLength
         }));
@@ -110,10 +111,14 @@ export class SaveMixComponent {
         var source = this.context.createBufferSource();
         source.buffer = bufferSource;
         source.connect(this.context.destination);
+        console.log(bufferSource);
+        console.log(source);
+
         return source.start()
     }
 
     private decodeAudio(buffer) {
+        console.log(buffer);
         return this.audio.decodeAudioData(buffer)
           .then(this.createSrc.bind(this))
     }
