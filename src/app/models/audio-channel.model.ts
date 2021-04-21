@@ -1,5 +1,5 @@
 export interface AudioChannel {
   url: string;
-  duration: string;
+  duration: number;
   name: string;
 }

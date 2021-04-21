@@ -7,14 +7,23 @@ import { Observable, Subject } from 'rxjs';
 export class AudioChannelsService {
 
   public sources = [];
-  private subject = new Subject<any>();
+  private playSubject = new Subject<any>();
+  private stopSubject = new Subject<any>();
 
   playAll() {
-      this.subject.next();
+      this.playSubject.next();
+  }
+
+  stopAll() {
+      this.stopSubject.next();
   }
 
   getPlayObservable(): Observable<any> {
-      return this.subject.asObservable();
+      return this.playSubject.asObservable();
+  }
+
+  getStopObservable(): Observable<any> {
+      return this.stopSubject.asObservable();
   }
 
 }

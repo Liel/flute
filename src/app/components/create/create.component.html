@@ -4,7 +4,7 @@
   </div>
   <div id="playAll">
     <span class="flute"></span>
-    <span [class.hidden]="channels.length == 0" (click)="playAll()"><div class="play-all-icon"><i class="fa fa-play"></i></div> {{longestDuration | audioDuration}}</span>
+    <span [class.hidden]="channels.length == 0" (click)="playToggle()"><div class="play-all-icon"><i [ngClass]="isPlaying ? 'fa-stop' : 'fa-play'" class="fa"></i></div> {{longestDuration | audioDuration}}</span>
   </div>
   <div id="channels">
     <app-audio-channel

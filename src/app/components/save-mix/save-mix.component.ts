@@ -107,15 +107,15 @@ export class SaveMixComponent {
     this.createBlob(buffer);
   }
 
-    private createSrc(bufferSource) {
-        var source = this.context.createBufferSource();
-        source.buffer = bufferSource;
-        source.connect(this.context.destination);
-        console.log(bufferSource);
-        console.log(source);
+  private createSrc(bufferSource) {
+      var source = this.context.createBufferSource();
+      source.buffer = bufferSource;
+      source.connect(this.context.destination);
+      console.log(bufferSource);
+      console.log(source);
 
-        return source.start()
-    }
+      return source.start()
+  }
 
     private decodeAudio(buffer) {
         console.log(buffer);

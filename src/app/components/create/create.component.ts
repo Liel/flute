@@ -14,6 +14,7 @@ export class CreateComponent implements OnInit {
   input: any;
   isMono: boolean = true;
   isRecording = false;
+  isPlaying = false;
   channels : AudioChannel[] =[];
   currentRecordingDuration: number;
   longestDuration: number = 0;
@@ -30,8 +31,31 @@ export class CreateComponent implements OnInit {
       this.startRecording();
   }
 
+  public playToggle() {
+    this.isPlaying ?
+      this.stopAll() :
+      this.playAll();
+  }
+
   public playAll() {
     this.audioChannelsService.playAll();
+    this.isPlaying = true;
+    var originalDuration = this.longestDuration;
+
+    var durationInterval = setInterval(()=>{
+      this.longestDuration -= 1;
+      if(this.longestDuration <= 0) {
+        this.longestDuration = originalDuration;
+        this.isPlaying = false;
+        clearInterval(durationInterval);
+      }
+    }, 1000);
+  }
+
+  public stopAll() {
+    this.audioChannelsService.stopAll();
+    this.isPlaying = false;
+    this.longestDuration = -1;
   }
 
   public removeChannel(channel : AudioChannel) {

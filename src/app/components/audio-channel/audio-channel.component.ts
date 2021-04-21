@@ -15,9 +15,12 @@ export class AudioChannelComponent implements OnInit, OnDestroy {
 
   sanitizedUrl : SafeUrl;
   playAllSubscriber: Subscription;
+  stopAllSubscriber: Subscription;
   isPlaying : boolean = false;
+  originalDuration : number;
 
   $player: HTMLAudioElement;
+  playDetectionInterval: NodeJS.Timeout;
 
   @ViewChild('stream') set playerRef(ref: ElementRef<HTMLAudioElement>) {
     this.$player = ref.nativeElement;
@@ -28,11 +31,13 @@ export class AudioChannelComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.sanitizedUrl = this.sanitize(this.channel.url);
     this.playAllSubscriber = this.audioChannelsService.getPlayObservable().subscribe(this.playAudio.bind(this));
+    this.stopAllSubscriber = this.audioChannelsService.getStopObservable().subscribe(this.stopAudio.bind(this));
   }
 
   playAudio() {
     this.$player.preload = "0";
     this.$player.play();
+    this.isPlaying = true;
     this.detectPlayerIsPlaying();
   }
 
@@ -41,14 +46,31 @@ export class AudioChannelComponent implements OnInit, OnDestroy {
     this.isPlaying = false;
   }
 
+  stopAudio() {
+    this.$player.pause();
+    this.initPlayer();
+    // clearInterval(this.playDetectionInterval);
+
+    // this.isPlaying = false;
+    // this.$player.currentTime = 0;
+  }
+
   detectPlayerIsPlaying() {
-    this.isPlaying = true;
-    var i = setInterval(()=>{
+    this.originalDuration = this.channel.duration;
+    this.playDetectionInterval = setInterval(()=>{
+      this.channel.duration -= 1;
+
       if(this.$player.paused || !this.isPlaying) {
-        this.isPlaying = false;
-        clearInterval(i);
+        this.initPlayer();
       }
     }, 1000);
+  }
+
+  initPlayer() {
+      this.isPlaying = false;
+      this.channel.duration = this.originalDuration;
+      clearInterval(this.playDetectionInterval);
+      this.$player.preload = "0";
   }
 
   sanitize(url:string){
@@ -154,6 +176,9 @@ export class AudioChannelComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     if(this.playAllSubscriber) {
       this.playAllSubscriber.unsubscribe();
+    }
+    if(this.stopAllSubscriber) {
+      this.stopAllSubscriber.unsubscribe();
     }
   }
 }
