@@ -147,7 +147,7 @@ export class CreateComponent implements OnInit {
     //recordingsList.appendChild(li);
     this.channels.push({
       url:url,
-      duration: String(this.currentRecordingDuration),
+      duration: this.currentRecordingDuration,
       name: filename
     } as AudioChannel);
     this.audioChannelsService.sources = this.channels.map(x => x.url);
