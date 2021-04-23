@@ -2,9 +2,20 @@
   <div id="record" (click)="recordBtnClicked()" [class.recording]="isRecording">
     <i class="fa fa-microphone" aria-hidden="true"></i>
   </div>
+  <app-metronome></app-metronome>
   <div id="playAll">
-    <span class="flute"></span>
-    <span [class.hidden]="channels.length == 0" (click)="playToggle()"><div class="play-all-icon"><i [ngClass]="isPlaying ? 'fa-stop' : 'fa-play'" class="fa"></i></div> {{longestDuration | audioDuration}}</span>
+    <div *ngIf="isRecording">
+      <div class="recording-icon">
+        <i class="fa fa-circle"></i>
+      </div>
+      <span>{{currentRecordingDuration | audioDuration}}</span>
+    </div>
+    <div [class.hidden]="channels.length == 0 || isRecording" (click)="playToggle()">
+      <div class="play-all-icon">
+        <i [ngClass]="isPlaying ? 'fa-stop' : 'fa-play'" class="fa"></i>
+      </div>
+      <span>{{longestDuration | audioDuration}}</span>
+    </div>
   </div>
   <div id="channels">
     <app-audio-channel

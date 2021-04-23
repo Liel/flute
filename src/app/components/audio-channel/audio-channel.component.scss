@@ -10,12 +10,17 @@ audio {
 }
 
 .audio-channel {
-    flex-basis: 90%;
-    display: flex;
-    justify-content: space-between;
-    border: 1px dashed;
-    border-radius: 3px;
-    padding: 3%;
+  flex-basis: 90%;
+  display: flex;
+  justify-content: space-between;
+  border: 1px dashed;
+  border-radius: 3px;
+  padding: 3%;
+  border-right: 0;
+  color: black;
+  border-color: #e8d470;
+  background: #fff9dc;
+  // background-image: url("../../../assets/bg-notes.png");
 
     &.playing  {
       animation: playing-box 1s infinite;

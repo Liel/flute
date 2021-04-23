@@ -1,0 +1,89 @@
+$screenTop: -38%;
+$height: 36vh;
+$animationDuration: 0.8s;
+$bxShadowColor:#8b2bec;
+$bgColor: #fffbf3;
+$bgBtnsColor: #9876ba;
+$txtColor: #4f2e70;
+
+#metronome {
+  position: fixed;
+  width: 100%;
+  background: $bgColor;
+  box-shadow: 0 0 3px $bxShadowColor;
+  z-index: 3;
+  top: $screenTop;
+  height: $height;
+  transition-duration: $animationDuration;
+
+  &.opened {
+    top:0;
+  }
+
+  button {
+    width: 14%;
+    border-radius: 30px;
+    padding: 3%;
+    border: 2px solid;
+    background: white;
+    font-size: 25pt;
+  }
+}
+
+.tempo-controls {
+    display: flex;
+    font-size: 7vh;
+    justify-content: space-around;
+    margin: 7% 0 12% 0;
+
+  .tempo-container {
+    background: $bgBtnsColor;
+    position: relative;
+    width: 111px;
+    border: 4px solid;
+    border-radius: 75px;
+    height: 110px;
+    color: $txtColor;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .bpm {
+      font-size: 24px;
+    }
+  }
+
+  button, .metroStyle {
+    background: $bgBtnsColor;
+    color:$txtColor;
+  }
+
+  #play-button {
+    position: absolute;
+    z-index: 4;
+    font-size: 17pt;
+    border: 3px solid;
+    top: 51%;
+    border-radius: 28px;
+    padding: 2%;
+  }
+}
+
+#toggleMetronome {
+  position: fixed;
+  left: 71%;
+  transition-duration: $animationDuration;
+  background: $bgColor;
+  padding: 1% 0;
+  box-shadow: 0 0 3px $bxShadowColor;
+  color: $txtColor;
+  width: 20%;
+  border-radius: 4px;
+  z-index: 5;
+  top:0;
+
+  &.opened {
+    top: $height;
+    transition-duration: $animationDuration;
+  }
+}

@@ -1,0 +1,23 @@
+<div id="metronome" [class.opened]="toggled">
+
+  <div class="tempo-controls">
+    <div id="play-button" [class.playing]="isRunning" (click)="play()" class="metroStyle">
+      <i class="fa fa-volume-up" aria-hidden="true"></i>
+    </div>
+
+    <!-- <button class="tempo-change" (click)="changeTempo(-5)" data-change="-5">-5</button> -->
+    <button class="tempo-change" (click)="changeTempo(-1)" data-change="-1">-</button>
+
+    <div class="tempo-container">
+        <div id="tempo">{{tempo}}</div>
+        <div class="bpm">bpm</div>
+    </div>
+
+    <button class="tempo-change" (click)="changeTempo(1)" data-change="+1">+</button>
+    <!-- <button class="tempo-change" (click)="changeTempo(5)" data-change="+5">+5</button> -->
+  </div>
+  <div>
+    <input type="checkbox" (click)="toggleMetronome()" />&nbsp;Turn on while recording
+  </div>
+</div>
+<div id="toggleMetronome" [class.opened]="toggled" (click)="toggled = !toggled">metronome</div>

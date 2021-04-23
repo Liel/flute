@@ -28,7 +28,12 @@ $textColor: white;
     font-size: 36pt;
   }
 
-  .hidden {visibility: hidden;}
+  .recording-icon {
+    font-size: 36pt;
+    animation: recording-icon 1s infinite;
+  }
+
+  .hidden {display: none;}
 }
 
 @keyframes recording {
@@ -46,5 +51,17 @@ $textColor: white;
     transform: rotate(
       360deg
       );
+  }
+}
+
+@keyframes recording-icon {
+  0% {
+    color: red;
+   }
+  50% {
+    color: $textColor;
+  }
+  100% {
+    color: red;
   }
 }

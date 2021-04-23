@@ -3,8 +3,8 @@
 </audio>
 <div class="wrapper">
   <div class="audio-channel" [class.playing]="isPlaying">
-    <div *ngIf="!isPlaying" (click)="playAudio()"><i class="fa fa-play"></i></div>
-    <div *ngIf="isPlaying" (click)="pauseAudio()"><i class="fa fa-stop"></i></div>
+    <!-- <div *ngIf="!isPlaying" (click)="playAudio()"><i class="fa fa-play"></i></div>
+    <div *ngIf="isPlaying" (click)="pauseAudio()"><i class="fa fa-stop"></i></div> -->
     <div *ngIf="isPlaying" class="playing"><span class="icon-p">♫</span></div>
     <div>{{channel.duration | audioDuration}}</div>
   </div>

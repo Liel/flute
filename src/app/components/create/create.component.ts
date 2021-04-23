@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AudioChannel } from 'src/app/models/audio-channel.model';
 import { AudioChannelsService } from 'src/app/services/audio-channels.service';
+import { CounterService } from 'src/app/services/counter.service';
+import { MetronomeService } from 'src/app/services/metronome.service';
 
 @Component({
   selector: 'app-create',
@@ -20,15 +22,19 @@ export class CreateComponent implements OnInit {
   longestDuration: number = 0;
   interval: any;
 
-  constructor(private audioChannelsService : AudioChannelsService) { }
+  constructor(private audioChannelsService : AudioChannelsService, private metronomeService : MetronomeService, private counterService: CounterService) { }
 
   ngOnInit(): void {
+    this.counterService.getFinishedObservable().subscribe(this.startRecording.bind(this));
   }
 
   public recordBtnClicked() {
-    this.isRecording ?
-      this.stopRecording() :
-      this.startRecording();
+    if(this.isRecording) {
+      this.stopRecording()
+    }
+    else {
+      this.prepareForRecording();
+    }
   }
 
   public playToggle() {
@@ -63,25 +69,23 @@ export class CreateComponent implements OnInit {
     this.channels.splice(idx);
   }
 
+  private prepareForRecording() {
+    this.metronomeService.play();
+    this.counterService.startCounting();
+  }
+
   private startRecording() : void {
     this.startTimer();
     this.playAll();
     this.isRecording = true;
 
-    /*
-      Simple constraints object, for more advanced audio features see
-      https://addpipe.com/blog/audio-constraints-getusermedia/
-    */
+    var constraints = { audio: true, video:false };
 
-      var constraints = { audio: true, video:false }
-
-    navigator.mediaDevices.getUserMedia(constraints).then(this.createStream.bind(this)).catch(function(err) {
-      console.log(err);
-        //enable the record button if getUserMedia() fails
-        // recordButton.disabled = false;
-        // stopButton.disabled = true;
-        // pauseButton.disabled = true
-    });
+    navigator.mediaDevices.getUserMedia(constraints)
+      .then(this.createStream.bind(this))
+      .catch(function(err) {
+        console.log(err);
+      });
   }
 
   private createStream(stream) {
@@ -109,6 +113,7 @@ export class CreateComponent implements OnInit {
 
   private stopRecording() {
     this.stopTimer();
+    this.metronomeService.stop();
     this.isRecording = false;
 
     //tell the recorder to stop the recording
@@ -127,21 +132,6 @@ export class CreateComponent implements OnInit {
 
     //name of .wav file to use during upload and download (without extendion)
     var filename = new Date().toISOString();
-
-    // var au = document.createElement('audio');
-    // var li = document.createElement('li');
-    // var link = document.createElement('a');
-    // //add controls to the <audio> element
-    // au.controls = true;
-    // au.src = url;
-    // //link the a element to the blob
-    // link.href = url;
-    // link.download = new Date().toISOString() + '.wav';
-    // link.innerHTML = link.download;
-    // //add the new audio and a elements to the li element
-    // li.appendChild(au);
-    // li.appendChild(link);
-    // document.body.appendChild(au);
 
     //add the li element to the ol
     //recordingsList.appendChild(li);
@@ -169,5 +159,4 @@ export class CreateComponent implements OnInit {
   private stopTimer() : void {
     clearInterval(this.interval);
   }
-
 }

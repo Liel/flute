@@ -7,6 +7,8 @@ import { CreateComponent } from './components/create/create.component';
 import { AudioChannelComponent } from './components/audio-channel/audio-channel.component';
 import { SaveMixComponent } from './components/save-mix/save-mix.component';
 import { AudioDurationPipe } from './pipes/audio-duration.pipe';
+import { MetronomeComponent } from './components/metronome/metronome.component';
+import { CounterComponent } from './components/counter/counter.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +16,9 @@ import { AudioDurationPipe } from './pipes/audio-duration.pipe';
     CreateComponent,
     AudioChannelComponent,
     SaveMixComponent,
-    AudioDurationPipe
+    AudioDurationPipe,
+    MetronomeComponent,
+    CounterComponent
   ],
   imports: [
     BrowserModule,
